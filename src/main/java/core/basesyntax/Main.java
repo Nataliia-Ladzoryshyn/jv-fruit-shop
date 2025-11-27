@@ -1,12 +1,11 @@
 package core.basesyntax;
-
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FileRead;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ParserService;
-import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileReadImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
@@ -22,7 +21,6 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-
         Map<Operation, OperationHandler> strategyMap = Map.of(
                 Operation.BALANCE, new BalanceOperationHandler(),
                 Operation.SUPPLY, new SupplyOperationHandler(),
@@ -31,21 +29,19 @@ public class Main {
 
         OperationStrategy strategy = new OperationStrategy(strategyMap);
 
-        FileRead reader = new FileReaderImpl();
+        FileRead reader = new FileReadImpl();
         ParserService parser = new ParserServiceImpl();
         FruitService fruitService = new FruitServiceImpl(strategy);
         FileWriter writer = new FileWriterImpl();
 
-        List<String> lines = reader.fileReader("src/main/java/resources/database.csv");
+        List<String> lines = reader.readFileContents("src/main/resources/database.csv");
         List<FruitTransaction> transactions = parser.getFromCsvRow(lines);
         Map<String, Integer> report = fruitService.process(transactions);
         List<String> output = new ArrayList<>();
         output.add("fruit, quantity");
 
         report.forEach((fruit, quantity) -> output.add(fruit + "," + quantity));
-
-        writer.write(output, "src/main/java/resources/result.csv");
-
+        writer.write(output, "src/main/resources/result.csv");
         System.out.println("Report created: " + "result.csv");
     }
 }

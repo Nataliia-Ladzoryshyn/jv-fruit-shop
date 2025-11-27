@@ -1,12 +1,17 @@
 package core.basesyntax.strategy;
-
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import java.util.Map;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
-    public void getActivities(Map<String, Integer> storage, FruitTransaction fruit) {
-        storage.put(fruit.getFruit(),
-                storage.getOrDefault(fruit.getFruit(), 0) - fruit.getQuantity());
+    public void handleTransaction(FruitTransaction fruitTransaction) {
+        String fruit = fruitTransaction.getFruit();
+        int beginQuality = Storage.storageFruit.getOrDefault(fruit, 0);
+        int newQuality = beginQuality - fruitTransaction.getQuantity();
+
+        if (newQuality < 0) {
+            throw new RuntimeException("There isn't that much fruit in the store");
+        }
+        Storage.storageFruit.put(fruit, newQuality);
     }
 }
