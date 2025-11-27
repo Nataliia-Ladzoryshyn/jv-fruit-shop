@@ -1,4 +1,5 @@
 package core.basesyntax.strategy;
+
 import core.basesyntax.model.Operation;
 import java.util.Map;
 
@@ -9,7 +10,8 @@ public class OperationStrategy {
         if (strategyMap == null) {
             throw new NullPointerException("The strategyMap is null");
         } else {
-        this.strategyMap = strategyMap;}
+            this.strategyMap = strategyMap;
+        }
     }
 
     public OperationHandler getStrategy(Operation operation) {

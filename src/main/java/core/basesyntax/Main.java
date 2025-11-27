@@ -1,4 +1,5 @@
 package core.basesyntax;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FileRead;

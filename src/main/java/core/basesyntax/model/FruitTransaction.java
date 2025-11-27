@@ -1,7 +1,8 @@
 package core.basesyntax.model;
+
 public class FruitTransaction {
     private final int quantity;
-    private  String fruit;
+    private String fruit;
     private final Operation operation;
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
