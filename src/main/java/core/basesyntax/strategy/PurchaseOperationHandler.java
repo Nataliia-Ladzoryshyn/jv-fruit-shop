@@ -7,12 +7,12 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void handleTransaction(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
-        int beginQuality = Storage.storageFruit.getOrDefault(fruit, 0);
+        int beginQuality = Storage.getStorageFruit().getOrDefault(fruit, 0);
         int newQuality = beginQuality - fruitTransaction.getQuantity();
 
         if (newQuality < 0) {
             throw new RuntimeException("There isn't that much fruit in the store");
         }
-        Storage.storageFruit.put(fruit, newQuality);
+        Storage.getStorageFruit().put(fruit, newQuality);
     }
 }

@@ -19,6 +19,6 @@ public class FruitServiceImpl implements FruitService {
         for (FruitTransaction fruit : transactions) {
             strategyHandler.getStrategy(fruit.getOperation()).handleTransaction(fruit);
         }
-        return Storage.storageFruit;
+        return Storage.getStorageFruit();
     }
 }

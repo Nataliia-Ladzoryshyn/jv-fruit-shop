@@ -19,7 +19,8 @@ public class ParserServiceImpl implements ParserService {
             String[] parts = csvRows.get(i).split(",");
 
             if (parts.length != 3) {
-                throw new IllegalArgumentException(" " + csvRows.get(i));
+                throw new IllegalArgumentException("Invalid data format in line: "
+                        + csvRows.get(i));
             }
             Operation operation = Operation.fromCode(parts[0]);
             String fruit = parts[1];
@@ -29,7 +30,7 @@ public class ParserServiceImpl implements ParserService {
                 quantity = Integer.parseInt(parts[2]);
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Invalid quantity value: '" + parts[2] + "' in line: "
-                        + csvRows.get(i));
+                        + csvRows.get(i), e);
             }
 
             if (quantity < 0) {

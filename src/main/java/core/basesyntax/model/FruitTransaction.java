@@ -2,7 +2,7 @@ package core.basesyntax.model;
 
 public class FruitTransaction {
     private final int quantity;
-    private String fruit;
+    private final String fruit;
     private final Operation operation;
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
@@ -17,10 +17,6 @@ public class FruitTransaction {
 
     public String getFruit() {
         return fruit;
-    }
-
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
     }
 
     public Operation getOperation() {
