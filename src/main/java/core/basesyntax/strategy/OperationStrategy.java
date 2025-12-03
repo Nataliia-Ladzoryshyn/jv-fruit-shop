@@ -7,11 +7,7 @@ public class OperationStrategy {
     private final Map<Operation, OperationHandler> strategyMap;
 
     public OperationStrategy(Map<Operation, OperationHandler> strategyMap) {
-        if (strategyMap == null) {
-            throw new NullPointerException("The strategyMap is null");
-        } else {
-            this.strategyMap = strategyMap;
-        }
+        this.strategyMap = strategyMap;
     }
 
     public OperationHandler getStrategy(Operation operation) {

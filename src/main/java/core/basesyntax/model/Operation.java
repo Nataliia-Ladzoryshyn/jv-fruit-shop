@@ -7,6 +7,7 @@ public enum Operation {
     RETURN("r");
 
     private final String code;
+
     Operation(String code) {
         this.code = code;
     }
